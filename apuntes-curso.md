@@ -7,6 +7,11 @@
 - [Conociendo Apache Spark](#conociendo-apache-spark)
   - [Introducción a Apache Spark](#introducción-a-apache-spark)
     - [Spark VS Hadoop](#spark-vs-hadoop)
+  - [Introducción a los RDDs y DataFrames](#introducción-a-los-rdds-y-dataframes)
+    - [Características de los RDD](#características-de-los-rdd)
+    - [Características de los DataFrame](#características-de-los-dataframe)
+    - [¿Cuándo usar un RDD?](#cuándo-usar-un-rdd)
+    - [¿Cuándo usar DataFrames?](#cuándo-usar-dataframes)
 - [Configuración](#configuración)
 - [Operaciones RDDs](#operaciones-rdds)
 - [Data Frames y SQL](#data-frames-y-sql)
@@ -50,6 +55,47 @@ Spark debe estar conectado a un Data warehouse para poder aprovechar toda su fun
 
 ![hadoop_vs_spark](https://imgur.com/ems5cAs.png)
 
+## Introducción a los RDDs y DataFrames
+
+### Características de los RDD
+
+> At a high level, every Spark application consists of a driver program that runs the user’s main function and executes various parallel operations on a cluster. The main abstraction Spark provides is a [resilient distributed dataset (RDD)](https://spark.apache.org/docs/latest/rdd-programming-guide.html), which is a collection of elements partitioned across the nodes of the cluster that can be operated on in parallel. 
+
+- **Principal abstracción de datos**: Es la unidad básica, existen desde su inicio hasta su versión 3.0.
+- **Distribución**: Los RDD se dritribuyen y particionan a lo largo del clúster.
+- **Creación simple**: Al no poseer estructura formalmente, adoptan las más intuitiva.
+- **Inmutabilidad**: Posterior a su creación no se pueden modificar
+- **Ejecución perezosa**: A menos que se realice una acción.
+
+Las transformaciones no se ejecutan hasta que se llama a una acción. Por ejemplo: ordenar el RDD (**RDD.orderBy()**) no se ejecutara hasta que se mande una acción en este caso **RDD.orderBy().show()**.
+
+| Transformaciones | Acciones |
+| --- | --- |
+| orderBy() | show() |
+| groupBy()| take() |
+| filter()| count() |
+| select()| collect() |
+| join() | save() |
+
+![flujo_de_rdd](https://imgur.com/740Dm9u.png)
+
+### Características de los DataFrame
+
+- **Formato**: A diferencia de un RDD poseen columnas, lo cual les otorga tipos de datos.
+- **Optimización**: Poseen una mejor implementación, lo cual los hace preferibles.
+- **Facilidad de creación**: Se pueden crear desde una base de datos externa, archivo o RDD existente.
+
+### ¿Cuándo usar un RDD?
+
+- Cuando te interesa controlar el flujo de Spark.
+- Si eres usuario Python, convertir a RDD un conjunto permite mejor control de datos.
+- Estás conectándote a versiones antiguas de spark.
+
+### ¿Cuándo usar DataFrames?
+
+- Si poseemos semánticas de datos complicadas.
+- Vamos a realizar tareas de alto nivel como filtros, mapeos, agregaciones, promedios o sumas.
+- Si vamos a usar sentencias SQL.
 
 # Configuración
 
