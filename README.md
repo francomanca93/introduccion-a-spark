@@ -22,3 +22,5 @@ Spark es el motor que te permitirá procesar datos a gran escala, gracias a su v
 > **Manipular un amplio volumen de datos de los Juegos Olímpicos**
 
 Se tendrá que limpiar, procesar y filtrar los datos registrados durante décadas en los Juegos Olímpicos para obtener información clara de los mismos gracias al poder de Spark.
+
+> [Enlace a los apuntes del curso](apuntes-curso.md)
